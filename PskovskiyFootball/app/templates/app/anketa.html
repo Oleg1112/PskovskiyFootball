@@ -1,0 +1,94 @@
+{% extends "app/layout.html" %}
+{% block content %}
+{% if form != None %}
+<br>
+<h2>Отправьте пожалуйста заполненную анкету</h2>
+<br>
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <label for="{{ form.name.id_for_label }}">{{ form.name.label }}:</label> {{form.name}}<br><br>
+        <label for="{{ form.city.id_for_label }}">{{ form.city.label }}:</label> {{form.city }}<br>
+        <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}:</label> {{form.gender }}
+        <label for="{{form.job.id_for_label }}">{{ form.job.label }}:</label><br> {{form.job }}<br><br>
+        <label for="{{ form.internet.id_for_label }}">{{ form.internet.label }}:</label><br> {{form.internet }}<br><br>
+        <label for="{{ form.notice.id_for_label }}">{{ form.notice.label }}:</label> {{form.notice }}<br><br>
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}:</label> {{form.email }}<br><br>
+        <label for="{{ form.message.id_for_label }}">{{ form.message.label }}:</label><br>{{ form.message }}<br><br>
+        <!--<input type="submit" value="Oтпpавить"> -->
+        <button id="b1" type="submit">
+            Отправить
+        </button>
+    </form>
+</div>
+{% else %}
+<br>
+<h2>Благодарим за предоставленную информацию!</h2>
+<h3>Вы сообщили о себе следующее:</h3>
+<ul>
+    <li><span>ИMA: </span> {{ data.name}}</li>
+    <li><span>Пopoд: </span> {{ data.city }}</li>
+    <li><span>Пon:</span> {{ data.gender }}</li>
+    <li><span>Paбoтa: </span> {{ data.job }}</li>
+    <li><span>В интернете: </span> {{ data.internet }}</li>
+    <li>
+        <span>Получать новости сайта на е-mail:</span> {{ data.notice }}
+    </li>
+    <li><span>Baw e-mail: </span> {{ data.email }}</li>
+    <li><span>Инфоpмaция о ceбe:</span> {{ data.message }}</li>
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+
+    {% load static %}
+<script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
+<script>function b1_mouseover() {
+        $('#b1').css('color', 'red')
+    }
+    $('#b1').mouseover(b1_mouseover);
+
+    function b1_mouseout() {
+        $('#b1').css('color', 'black')
+    }
+    $('#b1').mouseout(b1_mouseout);
+
+    function p1_focus() {
+        $('#id_name').css('background-color', 'gray')
+        $('#id_name').css('color', 'white')
+    }
+    $('#id_name').focus(p1_focus);
+
+    function p2_focus() {
+        $('#id_city').css('background-color', 'gray')
+        $('#id_city').css('color', 'white')
+    }
+    $('#id_city').focus(p2_focus);
+
+    function p3_focus(){
+        $('#id_message').css('background-color', 'gray')
+        $('#id_message').css('color', 'white')
+    }
+    $('#id_message').focus(p3_focus);
+
+    function p1_blur() {
+        $('#id_name').css('background-color', 'white')
+        $('#id_name').css('color', 'black')
+    }
+    $('#id_name').blur(p1_blur);
+
+    function p2_blur() {
+        $('#id_city').css('background-color', 'white')
+        $('#id_city').css('color', 'black')
+    }
+    $('#id_city').blur(p2_blur);
+
+    function p3_blur() {
+        $('#id_message').css('background-color', 'white')
+        $('#id_message').css('color', 'black')
+    }
+    $('#id_message').blur(p3_blur);</script>
+
+
+{% endblock %}
