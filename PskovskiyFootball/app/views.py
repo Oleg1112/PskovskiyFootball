@@ -60,7 +60,7 @@ def about(request):
 def registration(request):
     """Renders the registration page"""
 
-    if request.method == "Post":
+    if request.method == "POST":
         regform = UserCreationForm(request.POST)
         if regform.is_valid():
             reg_f = regform.save(commit=False)
